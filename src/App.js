@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import Entry from "./component/Entry";
 
-function App() {
+const entries = [
+  { date: "December-01-2011", desc: "House Insurance", price: "700" },
+  { date: "January-01-2012", desc: "New car", price: "3000" },
+  { date: "November-06-2013", desc: "New TV", price: "350" },
+];
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="expense">
+      {entries.map((entry) => (
+        <Entry props={entry} />
+      ))}
     </div>
   );
-}
+};
 
 export default App;
