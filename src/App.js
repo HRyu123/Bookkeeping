@@ -1,6 +1,7 @@
 import "./App.css";
 import React from "react";
 import Entry from "./component/Entry";
+import NewExpenseModule from "./component/NewExpenseModule";
 
 const entries = [
   { id: 1, date: "December-01-2011", desc: "House Insurance", price: "700" },
@@ -10,10 +11,13 @@ const entries = [
 
 const App = () => {
   return (
-    <div className="expense">
-      {entries.map((entry) => (
-        <Entry key={entry.id} props={entry} />
-      ))}
+    <div>
+      <NewExpenseModule />
+      <div className="expense">
+        {entries.map((entry) => (
+          <Entry key={entry.id} props={entry} />
+        ))}
+      </div>
     </div>
   );
 };
