@@ -2,7 +2,7 @@ import React from "react";
 import "./DateWidget.css";
 
 const DateWidget = ({ date }) => {
-  const [month, year, day] = date.split("-");
+  const [year, month, day] = date.split("-");
 
   return (
     <div className="date-widget">
