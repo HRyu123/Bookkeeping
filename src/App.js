@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
-import Entry from "./component/Entry";
 import NewExpenseModule from "./component/NewExpenseModule";
+import Entries from "./component/Entries";
 
 const App = () => {
   const initialEntries = JSON.parse(localStorage.getItem("expense"));
@@ -10,11 +10,7 @@ const App = () => {
   return (
     <div>
       <NewExpenseModule entries={entries} setEntries={setEntries} />
-      <div className="expense">
-        {entries.map((entry, index) => (
-          <Entry key={index} props={entry} />
-        ))}
-      </div>
+      <Entries entries={entries} />
     </div>
   );
 };
