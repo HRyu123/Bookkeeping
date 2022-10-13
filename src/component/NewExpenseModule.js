@@ -1,27 +1,42 @@
 import React, { useState } from "react";
+import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {add} from "../slice";
 import "./NewExpenseModule.css";
 
-const NewExpenseModule = ({ entries, setEntries }) => {
+const NewExpenseModule = () => {
   const initialNewExpense = {
     date: "",
     desc: "",
     price: "",
   };
   const [newExpense, setNewExpense] = useState(initialNewExpense);
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+
 
   const onInputChange = (field) => (event) => {
     setNewExpense({ ...newExpense, [field]: event.target.value });
   };
 
+  const createNewExpense = () =>
+    fetch("http://localhost:3004/entries", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newExpense),
+    });
+
   const addNewExpense = () => {
-    localStorage.setItem("expense", JSON.stringify([newExpense, ...entries]));
-    setEntries([newExpense, ...entries]);
+    createNewExpense().then(() => navigate('/expenses'));
     setNewExpense(initialNewExpense);
+    dispatch(add(newExpense))
   };
 
   return (
     <div className="new-expense">
-      <form>
+      <div className="form">
         <div className="new-expense__control">
           <label htmlFor="desc">description</label>
           <input
@@ -54,7 +69,7 @@ const NewExpenseModule = ({ entries, setEntries }) => {
             Add Expense
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 };
